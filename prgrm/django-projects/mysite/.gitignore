@@ -5,6 +5,8 @@
 __pycache__
 db.sqlite3
 media
+templates
+
 # Backup files
 *.bak
 # Python
@@ -59,8 +61,10 @@ venv/
 # Misc
 .mypy_cache
 /staticfiles
+
 # IDEs
 .DS_Store
 .idea
 .vscode
 /.idea/
+mysite.iml
