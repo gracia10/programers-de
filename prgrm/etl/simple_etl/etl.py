@@ -45,20 +45,24 @@ def load(records):
     """
     cur = get_Redshift_connection()
 
-    # (FULL REFRESH) DELETE FROM을 먼저 수행
-    sql = "TRUNCATE TABLE gracia10.name_gender"
-    cur.execute(sql)
+    try:
+        cur.execute("BEGIN;")
 
-    # INSERT 수행
-    sql = "BEGIN;"
-    for r in records:
-        name = r[0]
-        gender = r[1]
-        print(name, "-", gender)
-        sql += "INSERT INTO gracia10.name_gender VALUES ('{n}', '{g}');".format(n=name, g=gender)
-    sql += "END;"
+        # (FULL REFRESH) DELETE FROM을 먼저 수행
+        sql = "DELETE FROM gracia10.name_gender;"
+        cur.execute(sql)
 
-    cur.execute(sql)
+        # INSERT 수행
+        for r in records:
+            name = r[0]
+            gender = r[1]
+            print(name, "-", gender)
+            sql = "INSERT INTO gracia10.name_gender VALUES ('{n}', '{g}');".format(n=name, g=gender)
+            cur.execute(sql)
+        cur.execute("END;")
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+        cur.execute("ROLLBACK;")
 
 
 link = "https://s3-geospatial.s3-us-west-2.amazonaws.com/name_gender.csv"
