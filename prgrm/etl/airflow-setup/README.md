@@ -5,17 +5,22 @@
    -> 주기적으로 5분마다 스캔한다, `dag_dir_list_interval`
 3. 이 파일에서 Airflow를 API 형태로 외부에서 조작하고 싶다면 어느 섹션을
    변경해야하는가?  
-   -> `api` 섹션
+   -> `api` 섹션 의 `auth_backend`  (`airflow.api.auth.backend.basic_auth`)
 4. Variable에서 변수의 값이 encrypted가 되려면 변수의 이름에 어떤 단어들이
    들어가야 하는데 이 단어들은 무엇일까? :)  
    -> password, secret, passwd, authorization, api_key, apikey, access_token
 5. 이 환경 설정 파일이 수정되었다면 이를 실제로 반영하기 위해서 해야 하는
    일은?  
-   -> 서비스 재실행
+   ->
+    1) EC2 환경 ->서비스 재실행
    ```
    sudo systemctl restart airflow-scheduler
    sudo systemctl restart airflow-webserver
-   ```ㅁ
+   ```
+    2) Docker 환경
+   ```
+   docker restart <container_name>
+   ```
 
 6. Metadata DB의 내용을 암호화하는데 사용되는 키는 무엇인가?    
    -> `fernet_key`
