@@ -69,7 +69,7 @@ def load(schema, table, records):
 
         # 임시 테이블 내용을 원본 테이블로 복사
         cur.execute(f"""INSERT INTO {schema}.{table} 
-                        SELECT date, open, high , low , close, volume FROM (
+                        SELECT date, "open", high , low , close, volume FROM (
                             SELECT *, ROW_NUMBER() OVER (PARTITION BY date ORDER BY created_date desc) as seq FROM t
                         );""")
         cur.execute("COMMIT;")  # cur.execute("END;")
