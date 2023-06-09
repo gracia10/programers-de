@@ -49,10 +49,10 @@ def load(schema, table, ret):
                                 created_date timestamp default GETDATE()
                      );
                  """
-    logging(create_sql)
+    logging.info(create_sql)
 
     create_temp_sql = f"CREATE TEMP TABLE t AS SELECT * FROM {schema}.{table}"
-    logging(create_temp_sql)
+    logging.info(create_temp_sql)
 
     insert_temp_sql = f"INSERT INTO t VALUES " + ",".join(ret)
     logging.info(insert_temp_sql)
