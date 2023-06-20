@@ -1,5 +1,3 @@
-from airflow import DAG
-from airflow.macros import *
 from airflow.operators.python import PythonOperator
 
 from airflow.utils.decorators import apply_defaults
