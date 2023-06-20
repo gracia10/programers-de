@@ -26,4 +26,4 @@ tables_load = [
 ]
 
 dag_root_path = os.path.dirname(os.path.abspath(__file__))
-redshift_summary.build_summary_table(dag_root_path, dag, tables_load, "redshift_dev_db")
+redshift_summary.build_summary_table(dag_root_path, dag, tables_load, "redshift_dev_db".upper())
