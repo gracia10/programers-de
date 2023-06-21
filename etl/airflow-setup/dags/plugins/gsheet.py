@@ -18,7 +18,7 @@ def get_gsheet_client():
     scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
     gs_json_file_path = data_dir + 'google-sheet.json'
 
-    write_variable_to_local_file('google_sheet_access_token', gs_json_file_path)
+    write_variable_to_local_file('google_sheet_access_token'.upper(), gs_json_file_path)
     credentials = ServiceAccountCredentials.from_json_keyfile_name(gs_json_file_path, scope)
     gc = gspread.authorize(credentials)
 
