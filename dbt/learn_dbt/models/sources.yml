@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+  - name: gracia10
+    schema: raw_data
+    tables:
+      - name: metadata
+        identifier: user_metadata
+      - name: evnet
+        identifier: user_event
+        loaded_at_field: datestamp
+        freshness:
+          warn_after: { count: 1, period: hour }
+          error_after: { count: 100, period: hour }
+      - name: variant
+        identifier: user_variant
